@@ -1,18 +1,18 @@
 from datetime import datetime
-from typing import Dict
+from typing import Dict, List, Optional
 from fastapi import FastAPI
 import uvicorn
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from pydantic.main import BaseModel
 
 
 class Account(BaseModel):
     id: int
-    name: str
+    name: str=Field(..., example="João")
     document: str
     bornDate: str
     email: str
-    phoneNumber: str
+    phoneNumber: Optional[str]
 
 
 accounts = [
@@ -23,7 +23,7 @@ accounts = [
     Account(id=5, name="Murilo"  , document="12305", bornDate="05/09/1989", email="murilo@hotmail.com" , phoneNumber="24982013305"),
     Account(id=6, name="Renato"  , document="12306", bornDate="06/03/1994", email="renato@gmail.com"   , phoneNumber="55982013306"),
     Account(id=7, name="Maria"   , document="12307", bornDate="07/08/1988", email="maria@yahoo.com"    , phoneNumber="32982013307"),
-    Account(id=8, name="Bruna"   , document="12308", bornDate="08/09/1991", email="bruna@gmail.com"    , phoneNumber="21982013308")
+    Account(id=8, name="Bruna"   , document="12308", bornDate="08/09/1991", email="bruna@gmail.com")
 ]
 
 app = FastAPI()
@@ -32,29 +32,29 @@ app = FastAPI()
 def root() -> str:
     return "Welcome to New Life Bank"
 
-@app.get("/health/")
+@app.get("/health/", tags=["health"])
 def alive() -> Dict[str, datetime]:
     return {"timestamp": datetime.now()}
 
-@app.get("/accounts/")
+@app.get("/accounts/", response_model=List[Account], tags=["accounts"], summary="Return all accounts", description="Return all accounts")
 def account() -> Account:
     return accounts
 
-@app.get("/accounts/{id}")
+@app.get("/accounts/{id}", response_model=Optional[Account], tags=["accounts"])
 def account_id(id: int) -> Account:
     for account in accounts:
         if (account.id == id):
             return account
     return None
 
-@app.get("/accounts/{cpf}")
+@app.get("/accounts/{cpf}", response_model=Optional[Account], tags=["accounts"])
 def account_id(cpf: str) -> Account:
     for account in accounts:
         if (account.document == cpf):
             return account
     return None
 
-@app.post("/accounts/")
+@app.post("/accounts/", response_model=bool, tags=["accounts"])
 def account(account: Account) -> bool:
     try:
         accounts.append(account)
