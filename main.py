@@ -1,9 +1,9 @@
-from datetime import datetime
-from typing import Dict, List, Optional
-from fastapi import FastAPI
 import uvicorn
-from pydantic import BaseModel, Field
+from fastapi import FastAPI
+from datetime import datetime
 from pydantic.main import BaseModel
+from pydantic import BaseModel, Field
+from typing import Dict, List, Optional
 
 
 class Account(BaseModel):
@@ -65,4 +65,4 @@ def account(account: Account) -> bool:
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8001, reload=True)
