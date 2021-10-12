@@ -1,7 +1,5 @@
 # New Life Bank
 
-## Aula 04/10/2021
-
 ### 1) Criar um repositório no GitHub com o nome ```new_life_bank```
 * .gitignore
 * LICENCE
@@ -42,7 +40,6 @@ python -m virtualenv venv
 source venv/Scripts/activate
 ```
 ```(venv)  ```
-
 ### 11) Verificando as bibliotecas instaladas.
 ```
 pip3 freeze
@@ -65,21 +62,13 @@ pip3 freeze
 pip3 freeze >> requirements.txt
 ```
 ### 16) Escrever o primeiro servidor. <br/><br/>
-
 ### 17) Para rodar o servidor:
 ```
-uvicorn main:app --reload
+python main.py
 ```
 ### 18) Para realizar uma consulta no servidor:
 * browser (http://127.0.0.1:8000/) 
 * browser (http://127.0.0.1:8000/health/)
 * browser (http://127.0.0.1:8000/docs/)
 * curl 127.0.0.1:8000/health
-* postman
-
-
-
-
-
-
-
+* Thunder Client (vscode extensions)
