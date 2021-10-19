@@ -1,0 +1,12 @@
+# docker-compose.yml
+
+version: '3.7'
+
+services:
+  web:
+    build: .
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn app.main:app --host 127.0.0.1 --reload'
+    volumes:
+      - .:/app
+    ports:
+      - 8001:8000
