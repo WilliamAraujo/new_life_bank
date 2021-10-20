@@ -1,33 +1,27 @@
+#!/usr/bin/env python3
+
+from fastapi import Depends
 from typing import List, Optional
 from fastapi.routing import APIRouter
+from config.database import get_db
 from fastapi import HTTPException, status
+from sqlalchemy.orm.session import Session
 
-from account_schema import Account
+from domain.account import account_service
+from domain.account.account_schema import AccountSchema, AccountSchemaCreate
 
 router = APIRouter()
 
-accounts = []
+
+@router.get("/",
+            summary="Operação responsável por retornar a conta por filtro.",
+            response_model=List[AccountSchema])
+def get_accounts(db: Session = Depends(get_db)):
+    return account_service.get_accounts(db)
 
 
-# @app.get("/accounts/", response_model=List[Account], tags=["accounts"], summary="Return all accounts", description="Return all accounts")
-# def account() -> Account:
-#     return accounts
-
-# @app.get("/accounts/{id}", response_model=Optional[Account], tags=["accounts"])
-# def account_id(id: int) -> Account:
-#     for account in accounts:
-#         if (account.id == id):
-#             return account
-#     raise HTTPException(
-#         status_code=status.HTTP_404_NOT_FOUND,
-#         detail="ID Not found"
-#     )
-
-# @app.post("/accounts/", response_model=bool, tags=["accounts"])
-# def account(account: Account) -> bool:
-#     try:
-#         accounts.append(account)
-#     except Exception as e:
-#         print(f"Error in load account: {e}")
-#         return False
-#     return True
+@router.post("/",
+             summary="Operação responsável por criar uma nova conta.",
+             response_model=AccountSchema)
+def create_account(body: AccountSchemaCreate, db: Session = Depends(get_db)):
+    return account_service.create(db, body)

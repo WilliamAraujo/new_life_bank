@@ -1,11 +1,30 @@
+#!/usr/bin/env python3
+
 from typing import Optional
+from datetime import date, datetime
 from pydantic import BaseModel, Field
 
 
-class Account(BaseModel):
+class AccountSchema(BaseModel):
     id: int
     name: str=Field(..., example="João")
-    document: str
-    bornDate: str
+    born_date: date
     email: str
-    phoneNumber: Optional[str]
+    document: str
+    phone_number: Optional[str]
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        orm_mode = True
+
+
+class AccountSchemaCreate(BaseModel):
+    name: str
+    born_date: date
+    document: str
+    email: str
+    phone_number: str
+
+    class Config:
+        orm_mode = True    
