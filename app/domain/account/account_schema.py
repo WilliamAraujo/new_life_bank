@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from typing import Optional
 from datetime import date, datetime
 from pydantic import BaseModel, Field

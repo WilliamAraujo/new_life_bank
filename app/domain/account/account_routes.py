@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from fastapi import Depends
 from typing import List, Optional
 from fastapi.routing import APIRouter
