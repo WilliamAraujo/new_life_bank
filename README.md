@@ -1,6 +1,6 @@
 # New Life Bank
 
-## Aula 19/10/2021
+## Aula 25/10/2021
 
 ### 1) Abra o vscode através do terminal e acesse a pasta new_life_bank.
 ```
@@ -28,3 +28,7 @@ python main.py
 * [GET]   thunder-client (http://127.0.0.1:8000/Accounts)
 ### Adicionar uma nova conta:
 * [POST]  thunder-client (http://127.0.0.1:8000/Accounts/)
+### Buscar todas transferências realizadas:
+* [GET]   thunder-client (http://127.0.0.1:8000/Transactions)
+### Realizar uma transfêrencia:
+* [POST]  thunder-client (http://127.0.0.1:8000/Transactions/)
