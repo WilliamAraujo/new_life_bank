@@ -7,12 +7,13 @@ from sqlalchemy import (Column, Integer, String,
 
 
 class Transaction(Base):
-    __tablename__ = "transaction"
+    __tablename__ = "transactions"
 
     id = Column(Integer, primary_key=True, index=True)
     transaction_type = Column(String, nullable=False)
     amount = Column(Float, nullable=False)
-    account_id = Column(Integer, ForeignKey("account_id"))
+    destination_account = Column(String, nullable=False)
+    account_id = Column(String, ForeignKey("accounts.id"))
     account = relationship("Account")
 
     def __repr__(self) -> str:

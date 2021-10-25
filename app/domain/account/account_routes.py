@@ -12,11 +12,16 @@ router = APIRouter()
 
 
 @router.get("/",
-            summary="Operação responsável por retornar a conta por filtro.",
+            summary="Operação responsável por retornar todas as conta cadastradas.",
             response_model=List[AccountSchema])
 def get_accounts(db: Session = Depends(get_db)):
     return account_service.get_accounts(db)
 
+@router.get("/{id}",
+            summary="Operação responsável por retornar uma conta.",
+            response_model=List[AccountSchema])
+def get_account(id: int, db: Session = Depends(get_db)):
+    return account_service.get_account(db, id)
 
 @router.post("/",
              summary="Operação responsável por criar uma nova conta.",

@@ -11,3 +11,6 @@ class BaseRepository():
 
     def all(self, db: Session, cls) -> Any:
         return db.query(cls).all()
+
+    def filter_by_id(self, db: Session, cls, id: int) -> Any:
+        return db.query(cls).filter(cls.id == id).all()
