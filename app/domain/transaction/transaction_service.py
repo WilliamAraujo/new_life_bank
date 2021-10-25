@@ -13,7 +13,7 @@ def create(db: Session, body: TransactionSchemaCreate) -> TransactionSchema:
         _account = {"name": account.name, "document": account.document, "email": account.email}
         body.account_id = json.dumps(_account)
     transaction = Transaction(**body.dict())
-    return TransactionRepository().transfer(db, transaction)
+    return TransactionRepository().create(db, transaction)
 
 
 def get_transactions(db: Session) -> TransactionSchema:

@@ -1,9 +1,8 @@
 from sqlalchemy.orm import relationship
-from sqlalchemy.sql.schema import ForeignKey
 from config.database import Base
 from sqlalchemy.orm import relationship
-from sqlalchemy import (Column, Integer, String, 
-                        Float, ForeignKey)
+from sqlalchemy.sql.schema import ForeignKey
+from sqlalchemy import (Column, Integer, String, Float, ForeignKey)
 
 
 class Transaction(Base):

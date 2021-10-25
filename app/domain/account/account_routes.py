@@ -1,5 +1,5 @@
+from typing import List
 from fastapi import Depends
-from typing import List, Optional
 from fastapi.routing import APIRouter
 from config.database import get_db
 from fastapi import HTTPException, status
